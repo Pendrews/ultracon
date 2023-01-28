@@ -1,0 +1,164 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    {% load widget_tweaks %}
+    <div class="register-page">
+    <img src="{% static 'img/bg/4.jpeg' %}" style="position: absolute;z-index: -2;left:0;right:0;top:0;bottom:0;animation: 30.0s ZoomIn; animation-iteration-count: infinite; background-size: contain; margin-bottom: auto"/>
+    <div class="full-page register-page section-image" filter-color="black" data-image="{% static 'img/bg/jan-sendereks.jpg' %}">
+      <div class="content">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-5 col-md-5 ml-auto">
+              <div class="info-area info-horizontal mt-5">
+                <div class="icon icon-primary">
+                  <i class="nc-icon nc-tv-2"></i>
+                </div>
+                <div class="description">
+                  <h5 class="info-title">Marketing</h5>
+                  <p class="description">
+                    We've created the marketing campaign of the website. It was a very interesting collaboration.
+                  </p>
+                </div>
+              </div>
+              <div class="info-area info-horizontal mt-5">
+                <div class="icon icon-primary" >
+                  <i class="nc-icon nc-html5"></i>
+                </div>
+                <div class="description">
+                  <h5 class="info-title">Fully Coded in HTML5</h5>
+                  <p class="description">
+                    We've developed the website with HTML5 and CSS3. The client has access to the code using GitHub.
+                  </p>
+                </div>
+              </div>
+              <div class="info-area info-horizontal">
+                <div class="icon icon-info">
+                  <i class="nc-icon nc-atom"></i>
+                </div>
+                <div class="description">
+                  <h5 class="info-title">Built Audience</h5>
+                  <p class="description">
+                    There is also a Fully Customizable CMS Admin Dashboard for this product.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 mr-auto mt-n2">
+              <div class="card card-signup text-center">
+                <div class="card-header ">
+                  <h4 class="card-title">Register</h4>
+
+                </div>
+
+                <div class="card-body ">
+              {% if form.errors %}
+              <div class="error">
+                {% for field, errors in form.errors.items %}
+                  {% for error in errors %}
+                    <p class="text-warning"> {{ error }}</p>
+                  {% endfor %}
+                {% endfor %}
+              </div>
+            {% endif %}
+                  <form class="form" method="POST">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="nc-icon nc-single-02"></i>
+                        </span>
+                      </div>
+                        {% render_field form.first_name class="input form-control" type="text" placeholder="First Name"%}
+                    </div>
+
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="nc-icon nc-single-02"></i>
+                        </span>
+                      </div>
+                        {% render_field form.last_name class="input form-control" type="text" placeholder="Last Name"%}
+                    </div>
+
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="nc-icon nc-single-02"></i>
+                        </span>
+                      </div>
+                        {% render_field form.username class="input form-control" type="text" placeholder="Username"%}
+                    </div>
+
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="nc-icon nc-email-85"></i>
+                        </span>
+                      </div>
+                      <input type="email" class="form-control" placeholder="Email...">
+                    </div>
+
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="nc-icon nc-single-02"></i>
+                        </span>
+                      </div>
+                    {% render_field form.password1 class="input form-control" type="password" placeholder="password"%}
+
+                    </div>
+
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="nc-icon nc-circle-10"></i>
+                        </span>
+                      </div>
+                         {% render_field form.password2 class="input form-control" type="password" placeholder="confirm password"%}
+                    </div>
+
+                    <div class="form-check text-left">
+                      <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" checked>
+                        <span class="form-check-sign"></span>
+                        I agree to the <a href="#something">terms and conditions</a>.
+                      </label>
+                    </div>
+                        {% csrf_token %}
+                        <div class="card-footer ">
+                          <input class="btn btn-info btn-round" type="submit" value="Get Started">
+                        </div>
+                  </form>
+
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <footer class="footer footer-black  footer-white ">
+        <div class="container-fluid">
+          <div class="row">
+            <nav class="footer-nav">
+              <ul>
+                <li><a href="https://www.creative-tim.com" target="_blank">Creative Tim</a></li>
+                <li><a href="https://www.creative-tim.com/blog" target="_blank">Blog</a></li>
+                <li><a href="https://www.creative-tim.com/license" target="_blank">Licenses</a></li>
+              </ul>
+            </nav>
+            <div class="credits ml-auto">
+              <span class="copyright">
+                © <script>
+                  document.write(new Date().getFullYear())
+                </script>, made with <i class="fa fa-heart heart"></i> by Creative Tim
+              </span>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+</div>
+{% endblock %}

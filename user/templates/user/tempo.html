@@ -1,0 +1,338 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% load widget_tweaks %}
+      <div class="content">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card card-user">
+              <div class="image">
+                <img src="{{ user.profile.cover_pic.url }}" alt="...">
+              </div>
+              <div class="card-body">
+                <div class="author">
+                  <a href="#">
+                    <img class="avatar border-gray" src="{{ user.profile.profil_pic.url }}" alt="..."><br>
+
+
+
+                    <h5 class="title">{{ user.first_name }} {{ user.last_name }}</h5>
+                  </a>
+                  <p class="description">
+                    email:{{ user.email }}
+                  </p>
+                </div>
+                <p class="description text-center">
+                  Age: <br>
+                  {{ user.profile.age }} <br>
+
+                </p>
+              </div>
+
+            </div>
+
+            <div class="card">
+
+              <div class="card-body">
+                        <div class="modal-body">
+
+        <form>
+            {% csrf_token %}
+            {{ addbene }}
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+        </form>
+
+      </div>
+
+              </div>
+            </div>
+
+              <div class="card">
+              <div class="card-header">
+                <h4 class="card-title">Nominated Beneficaries</h4>
+              </div>
+              <div class="card-body">
+                <ul class="list-unstyled team-members">
+                    {% for bene in bene %}
+                        {% if bene.user == user %}
+                  <li>
+                    <div class="row">
+                      <div class="col-md-2 col-2">
+                        <div class="avatar">
+                          <img src="../../assets/img/faces/ayo-ogunseinde-2.jpg" alt="Circle Image" class="img-circle img-no-padding img-responsive">
+                        </div>
+                      </div>
+                      <div class="col-md-7 col-7">
+                        {{ bene.first_name }} {{ bene.last_name }}
+                        <br />
+                        <span class="text-success"><small>{{ bene.relationship }}</small></span>
+                      </div>
+                      <div class="col-md-3 col-3 text-right">
+                        <btn class="btn btn-sm btn-outline-success btn-round btn-icon"><span>{{ bene.allocation }}</span></btn>
+                      </div>
+                    </div>
+                    <hr>
+                  </li>
+                        {% endif %}
+                    {% endfor %}
+
+                </ul>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-md-8">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="title">Edit Profile</h5>
+              </div>
+
+
+              <div class="card-body">
+
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ u_form.error }}
+                  <div class="row">
+                    <div class="col-md-5 pr-1">
+                      <div class="form-group">
+                        <label>Company (disabled)</label>
+                        <input type="text" class="form-control" disabled="" placeholder="Company" value="Standards Pensions Scheme.">
+                      </div>
+                    </div>
+                    <div class="col-md-3 px-1">
+                      <div class="form-group">
+                        <label>User ID</label>
+                        <input type="text" class="form-control" placeholder="SPT9048533" value="{{ user.username }}" disabled="" >
+                      </div>
+                    </div>
+
+
+                    <div class="col-md-4 pl-1">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                          <input type="text" class="form-control" placeholder="SPT9048533" value="{{ user.email }}" disabled="" >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 pr-1">
+                      <div class="form-group">
+                        <label>First Name</label>
+                         <input type="text" class="form-control" placeholder="SPT9048533" value="{{ user.first_name|default:"" }}" disabled="" >
+                      </div>
+                    </div>
+                    <div class="col-md-6 pl-1">
+                      <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" class="form-control" placeholder="SPT9048533" value="{{ user.last_name|default:"" }}" disabled="" >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-7">
+                      <div class="form-group">
+                        <label>Other Names</label>
+                       <input type="text" class="form-control" placeholder="SPT9048533" value="{{ user.profile.other_names|default:"" }}" disabled="" >
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label>Date of Birth</label>
+                       <input type="text" class="form-control" placeholder="SPT9048533" value="{{ user.profile.dob|default:"" }}" disabled="" >
+                      </div>
+                    </div>
+                      <div class="col-md-2">
+                      <div class="form-group">
+                        <label>Gender</label>
+                        <input type="text" class="form-control" placeholder="SPT9048533" value="{{ user.profile.gender|default:"" }}" disabled="" >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4 pr-1">
+                      <div class="form-group">
+                        <label>Nationality</label>
+                        <input type="text" class="form-control" placeholder="SPT9048533" value="{{ user.profile.country|default:"" }}" disabled="" >
+                      </div>
+                    </div>
+                    <div class="col-md-4 px-1">
+                      <div class="form-group">
+                        <label>Country of Birth</label>
+                       <input type="text" class="form-control" placeholder="" value="{{ user.profile.country_of_birth|default:"" }}" disabled="" >
+                      </div>
+                    </div>
+                    <div class="col-md-4 pl-1">
+                      <div class="form-group">
+                        <label>Place of Birth</label>
+                        <input type="text" class="form-control" placeholder="" value="{{ user.profile.place_of_birth|default:"" }}" disabled="" >
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <div class="row">
+                    <div class="col-md-4 pr-1">
+                      <div class="form-group">
+                        <label>Main Phone</label>
+                        <input type="text" class="form-control" placeholder="" value="{{ user.profile.phone|default:"" }}" disabled="" >
+                      </div>
+                    </div>
+                    <div class="col-md-4 px-1">
+                      <div class="form-group">
+                        <label>Secondary Phone</label>
+                        <input type="text" class="form-control" placeholder="" value="{{ user.profile.alt_phone|default:"" }}" disabled="" >
+                      </div>
+                    </div>
+                    <div class="col-md-4 pl-1">
+                      <div class="form-group">
+                        <label>Digital Address</label>
+                        <input type="text" class="form-control" placeholder="" value="{{ user.profile.dig_address|default:"" }}" disabled="" >
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Postal Address</label>
+                        <input type="text" class="form-control" placeholder="" value="{{ user.profile.postal_address|default:"" }}" disabled="" >
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-12">
+                          <div class="form-group">
+                            <label>Physical Address</label>
+                              <input type="text" class="form-control" placeholder="" value="{{ user.profile.res_address|default:"" }}" disabled="" >
+                          </div>
+                      </div>
+                    </div>
+                  <hr>
+
+                  <div class="row">
+                    <div class="col-md-6 pr-1">
+                      <div class="form-group">
+                        <label>SSNIT Number</label>
+                       <input type="text" class="form-control" placeholder="" value="{{ user.profile.ssnit|default:"" }}" disabled="" >
+                      </div>
+                    </div>
+                    <div class="col-md-6 pl-1">
+                      <div class="form-group">
+                        <label>Ghana Card</label>
+                        <input type="text" class="form-control" placeholder="" value="{{ user.profile.national_id|default:"" }}" disabled="" >
+                      </div>
+                    </div>
+                    </div>
+
+                  <hr>
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Next of Kin Name</label>
+                        <input type="text" class="form-control" placeholder="" value="{{ user.profile.nok|default:"" }}" disabled="" >
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Next of Kin Address</label>
+                        <input type="text" class="form-control" placeholder="" value="{{ user.profile.nok_address|default:"" }}" disabled="" >
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6 pr-1">
+                      <div class="form-group">
+                        <label>Next of Kin Relationship</label>
+                         <input type="text" class="form-control" placeholder="" value="{{ user.profile.nok_rel|default:"" }}" disabled="">
+                      </div>
+                  </div>
+                    <div class="col-md-6 pl-1">
+                      <div class="form-group">
+                        <label>NOK Contact</label>
+                        <input type="text" class="form-control" placeholder="" value="{{ user.profile.nok_phone|default:"" }}" disabled="">
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-md-4 pr-1">
+                      <div class="form-group">
+                        <label>Father's Name</label>
+                        <input type="text" class="form-control" placeholder="" value="{{ user.profile.father_name|default:"" }}" disabled="">
+                      </div>
+                    </div>
+                    <div class="col-md-8 pl-1">
+                      <div class="form-group">
+                        <label>Father's Address</label>
+                        <input type="text" class="form-control" placeholder="" value="{{ user.profile.father_address|default:"" }}" disabled="">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-4 pr-1">
+                      <div class="form-group">
+                        <label>Mother's Name</label>
+                        <input type="text" class="form-control" placeholder="" value="{{ user.profile.mother_name|default:"" }}" disabled="">
+                      </div>
+                    </div>
+                    <div class="col-md-8 pl-1">
+                      <div class="form-group">
+                        <label>Monther's Address</label>
+                        <input type="text" class="form-control" placeholder="" value="{{ user.profile.mother_address|default:"" }}" disabled="">
+                      </div>
+                    </div>
+                  </div>
+{#                  <div class ="" >#}
+{#                      <div class="">#}
+{#                        <button class="btn btn-success">Update</button>#}
+{#                        <button class="btn btn-primary">Print Enrolment Form</button>#}
+{#                      </div>#}
+{#                  </div>#}
+                </form>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    <!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLong" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        <form>
+            {% csrf_token %}
+            {{ form }}
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+
+        </form>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% load example %}
+{% load widget_tweaks %}
+  {{ wizard.management_form }}
+
+
+
+
+  {% for field in wizard.form %}
+
+
+  <label class="form-label">{{ field.label }}</label>
+
+  {{field | add_classes:'form-control mb-2 input account-form'}}
+{#     {% render_field field class="input form-control" type="text"%}#}
+
+  {% endfor %}
+
+
+
+
+
+
+
+{#                  <div class="input-group">#}
+{#                    <div class="input-group-prepend">#}
+{#                      <span class="input-group-text">#}
+{#                        <i class="nc-icon nc-single-02"></i>#}
+{#                      </span>#}
+{#                    </div>#}
+{#                    <input type="text" class="form-control" placeholder="First Name...">#}
+{#                  </div>#}
+{##}

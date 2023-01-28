@@ -1,0 +1,290 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% load widget_tweaks %}
+      <div class="content">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="card card-user">
+              <div class="image">
+                <img src="{{ user.profile.cover_pic.url }}" alt="...">
+              </div>
+              <div class="card-body">
+                <div class="author">
+                  <a href="#">
+                    <img class="avatar border-gray" src="{{ user.profile.profil_pic.url }}" alt="..."><br>
+
+
+
+                    <h5 class="title">{{ user.first_name }} {{ user.last_name }}</h5>
+                  </a>
+                  <p class="description">
+                    email:{{ user.email }}
+                  </p>
+                </div>
+                <p class="description text-center">
+                  Age: <br>
+                  {{ user.profile.age }} <br>
+
+                </p>
+              </div>
+
+            </div>
+
+
+
+
+
+          </div>
+
+          <div class="col-md-8">
+            <div class="card">
+              <div class="card-header">
+                <h5 class="title">Edit Profile</h5>
+              </div>
+
+
+              <div class="card-body">
+
+                <form method="POST">
+                    {% csrf_token %}
+                    {{ u_form.error }}
+                  <div class="row">
+                    <div class="col-md-5 pr-1">
+                      <div class="form-group">
+                        <label>Company (disabled)</label>
+                        <input type="text" class="form-control" disabled="" placeholder="Company" value="Standards Pensions Scheme.">
+                      </div>
+                    </div>
+                    <div class="col-md-3 px-1">
+                      <div class="form-group">
+                        <label>User ID</label>
+                        <input type="text" class="form-control" placeholder="SPT9048533" value="{{ user.username }}" disabled="" >
+                      </div>
+                    </div>
+
+
+                    <div class="col-md-4 pl-1">
+                      <div class="form-group">
+                        <label for="exampleInputEmail1">Email address</label>
+                          {% render_field u_form.email class="input form-control" type="email" placeholder="email"%}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-6 pr-1">
+                      <div class="form-group">
+                        <label>First Name</label>
+                          {% render_field u_form.first_name class="input form-control" type="text" placeholder="first name"%}
+                      </div>
+                    </div>
+                    <div class="col-md-6 pl-1">
+                      <div class="form-group">
+                        <label>Last Name</label>
+                        {% render_field u_form.last_name class="input form-control" type="text" placeholder="last name"%}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-7">
+                      <div class="form-group">
+                        <label>Other Names</label>
+                        {% render_field p_form.other_names class="input form-control" type="text" placeholder="other names"%}
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label>Date of Birth</label>
+                        {% render_field p_form.dob class="input form-control" type="date"%}
+                      </div>
+                    </div>
+                      <div class="col-md-2">
+                      <div class="form-group">
+                        <label>Gender</label>
+                        {% render_field p_form.gender class="input form-control" type="text" placeholder="gender"%}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4 pr-1">
+                      <div class="form-group">
+                        <label>Nationality</label>
+                        {% render_field p_form.country class="input form-control" type="text" placeholder="nationality"%}
+                      </div>
+                    </div>
+                    <div class="col-md-4 px-1">
+                      <div class="form-group">
+                        <label>Country of Birth</label>
+                        {% render_field p_form.country_of_birth class="input form-control" type="text" placeholder="Country of Birth"%}
+                      </div>
+                    </div>
+                    <div class="col-md-4 pl-1">
+                      <div class="form-group">
+                        <label>Place of Birth</label>
+                        {% render_field p_form.place_of_birth class="input form-control" type="text" placeholder="Place of Birth"%}
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+
+                  <div class="row">
+                    <div class="col-md-4 pr-1">
+                      <div class="form-group">
+                        <label>Main Phone</label>
+                        {% render_field p_form.phone class="input form-control" type="text" placeholder="phone number"%}
+                      </div>
+                    </div>
+                    <div class="col-md-4 px-1">
+                      <div class="form-group">
+                        <label>Secondary Phone</label>
+                        {% render_field p_form.alt_phone class="input form-control" type="text" placeholder="other phone numbers"%}
+                      </div>
+                    </div>
+                    <div class="col-md-4 pl-1">
+                      <div class="form-group">
+                        <label>Digital Address</label>
+                        {% render_field p_form.dig_address class="input form-control" type="text" placeholder="Ghana Post Address"%}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Postal Address</label>
+                        {% render_field p_form.postal_address class="input form-control" type="text" placeholder="Postal Address"%}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                      <div class="col-md-12">
+                          <div class="form-group">
+                            <label>Physical Address</label>
+                              {% render_field p_form.res_address class="input form-control" type="textarea" placeholder="Address"%}
+                          </div>
+                      </div>
+                    </div>
+                  <hr>
+
+                  <div class="row">
+                    <div class="col-md-6 pr-1">
+                      <div class="form-group">
+                        <label>SSNIT Number</label>
+                       {% render_field p_form.ssnit class="input form-control" type="text" placeholder="SSNIT no"%}
+                      </div>
+                    </div>
+                    <div class="col-md-6 pl-1">
+                      <div class="form-group">
+                        <label>Ghana Card</label>
+                        {% render_field p_form.national_id class="input form-control" type="text" placeholder="Ghana Card Number"%}
+                      </div>
+                    </div>
+                    </div>
+
+                  <hr>
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Next of Kin Name</label>
+                        {% render_field p_form.nok class="input form-control" type="text" placeholder="Ghana Card Number"%}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-12">
+                      <div class="form-group">
+                        <label>Next of Kin Address</label>
+                        {% render_field p_form.nok_address class="input form-control" type="text" placeholder="Ghana Card Number"%}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-6 pr-1">
+                      <div class="form-group">
+                        <label>Next of Kin Relationship</label>
+                        {% render_field p_form.nok_rel class="input form-control" type="text" placeholder="Next of Kin Relationship"%}
+                      </div>
+                  </div>
+                    <div class="col-md-6 pl-1">
+                      <div class="form-group">
+                        <label>NOK Contact</label>
+                        {% render_field p_form.nok_phone class="input form-control" type="text" placeholder="Ghana Card Number"%}
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-md-4 pr-1">
+                      <div class="form-group">
+                        <label>Father's Name</label>
+                        {% render_field p_form.father_name class="input form-control" type="text" placeholder="Fathers Name"%}
+                      </div>
+                    </div>
+                    <div class="col-md-8 pl-1">
+                      <div class="form-group">
+                        <label>Father's Address</label>
+                        {% render_field p_form.father_address class="input form-control" type="text" placeholder="Fathers Address"%}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-4 pr-1">
+                      <div class="form-group">
+                        <label>Mother's Name</label>
+                        {% render_field p_form.mother_name class="input form-control" type="text" placeholder="Mothers Name"%}
+                      </div>
+                    </div>
+                    <div class="col-md-8 pl-1">
+                      <div class="form-group">
+                        <label>Monther's Address</label>
+                        {% render_field p_form.mother_address class="input form-control" type="text" placeholder="Mothers Address"%}
+                      </div>
+                    </div>
+                  </div>
+
+
+                        <button class="btn btn-success" type="submit">Save Changes</button>
+
+
+
+                </form>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    <!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLong" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+            {% csrf_token %}
+            {{ form }}
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Save changes</button>
+            </div>
+
+        </form>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}

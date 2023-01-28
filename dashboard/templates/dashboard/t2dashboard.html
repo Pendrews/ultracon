@@ -1,0 +1,206 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% load humanize %}
+
+     <div class="content">
+
+     {% for bal in bal %}
+         {% if user == bal.user %}
+        <div class="row">
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+              <div class="card-body ">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big text-center icon-warning">
+                      <i class="nc-icon nc-money-coins text-warning"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category">Contribution</p>
+                      <p class="card-title">{{ bal.contribution|intcomma }}<p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer ">
+                <hr>
+                <div class="stats">
+                  <i class="fa fa-refresh"></i>
+                  last Payment: {{ bal.last_cont_date|naturalday }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+              <div class="card-body ">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big text-center icon">
+                      <i class="nc-icon nc-icon nc-chart-pie-36 text-success"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category">Interest</p>
+                      <p class="card-title">{{ bal.interest|intcomma }}<p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer ">
+                <hr>
+                <div class="stats">
+                  <i class="fa fa-calendar-o"></i>
+                  Updated: {{ bal.updated|timesince }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+              <div class="card-body ">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big text-center icon-warning">
+                      <i class="nc-icon nc-simple-delete text-warning"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category">Withdrawals</p>
+                      <p class="card-title">{{ bal.withdrawal|intcomma }}<p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer ">
+                <hr>
+                <div class="stats">
+                  <i class="fa fa-calendar-o"></i>
+                  Updated: {{ bal.updated|timesince }}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="card card-stats">
+              <div class="card-body ">
+                <div class="row">
+                  <div class="col-5 col-md-4">
+                    <div class="icon-big text-center icon-warning">
+                      <i class="nc-icon nc-favourite-28 text-primary"></i>
+                    </div>
+                  </div>
+                  <div class="col-7 col-md-8">
+                    <div class="numbers">
+                      <p class="card-category"> Balance</p>
+                      <p class="card-title">{{ bal.balance|intcomma }}<p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer ">
+                <hr>
+                <div class="stats">
+                  <i class="fa fa-refresh"></i>
+                  Update: {{ bal.updated|timesince }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+         {% endif %}
+     {% endfor %}
+        <div class="row">
+
+         <div class="col-lg-12 col-sm-4">
+            <div class="card">
+             <div class="progress-container progress-success">
+              <span class="progress-badge">Age Progress towards retirement</span>
+              <div class="progress">
+                  <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+                      <span class="progress-value">60%</span>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+          <div class="col-lg-12 col-sm-4">
+            <div class="card">
+              <div class="card-header">
+                <div class="row">
+                  <div class="col-sm-7">
+                    <div class="numbers pull-left">
+                        {% for bal in bal %}
+                            {% if bal.user == user %}
+                      GHs: {{ bal.balance|intcomma:"2" }}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                  </div>
+                  <div class="col-sm-5">
+                    <div class="pull-right">
+                      <span class="badge badge-pill badge-success">
+                           {% for rate in rate %}
+                              {% if rate.user == user %}
+                                {{ rate.rate|floatformat:"2" }} %
+                              {% endif %}
+                          {% endfor %}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body">
+                <h6 class="big-title">Portfolio Growth</h6>
+                <canvas id="portfolio" width="826" height="200"></canvas>
+              </div>
+              <div class="card-footer">
+                <hr>
+                <div class="row">
+                  <div class="col-sm-7">
+                    <div class="footer-title">View all members</div>
+                  </div>
+                  <div class="col-sm-5">
+                    <div class="pull-right">
+                      <button class="btn btn-danger btn-round btn-icon btn-sm">
+                        <i class="nc-icon nc-button-play"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+      </div>
+      <footer class="footer footer-black  footer-white ">
+        <div class="container-fluid">
+          <div class="row">
+            <nav class="footer-nav">
+              <ul>
+                <li><a href="https://www.creative-tim.com" target="_blank">Creative Tim</a></li>
+                <li><a href="https://www.creative-tim.com/blog" target="_blank">Blog</a></li>
+                <li><a href="https://www.creative-tim.com/license" target="_blank">Licenses</a></li>
+              </ul>
+            </nav>
+            <div class="credits ml-auto">
+              <span class="copyright">
+                © <script>
+                  document.write(new Date().getFullYear())
+                </script>, made with <i class="fa fa-heart heart"></i> by Creative Tim
+              </span>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+{% endblock %}

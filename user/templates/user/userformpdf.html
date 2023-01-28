@@ -1,0 +1,187 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        body {
+
+            margin: 0px;
+            padding: 0px;
+            width: 100%;
+            font-size: 12px;
+        }
+
+        .main_content {
+            width: 90%;
+            margin: 0px auto;
+            border: 1px solid #9A9A9A;
+        }
+
+        .header {
+            width: 100%;
+            border-collapse: collapse;
+            border: none;
+        }
+
+
+        .header_logo img {
+            display: block;
+            width: 40%;
+            border: none;
+        }
+
+        .header_info {
+            margin-top: 20px;
+            border: none;
+        }
+
+        .header_details {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+
+        .header_details p {
+            width: 70%;
+        }
+
+
+        .form_table table {
+            width: 100%;
+        }
+
+        .table-title {
+            background: #CBCBCB;
+            height: 25px;
+        }
+
+        .table-content {
+            height: 75px;
+            background: #ffffff;
+            width: 100%;
+
+
+        }
+        .smal{
+            width: 10px;
+        }
+
+        .table-title-content {
+            background: #CBCBCB;
+            height: 45px;
+        }
+
+
+        .input_div{
+            background: #ffffff;
+            height: 40px;
+            width:100%;
+        }
+
+        .second-grid .image {
+            align-items: center;
+            vertical-align: middle;
+        }
+
+        .form_table table,
+        th,
+        td {
+            border: 2px solid #9A9A9A;
+            border-collapse: collapse;
+        }
+    </style>
+</head>
+
+<body>
+<img src="{% static 'img/logo-small.png' %}" width="500" height="500">
+<table border="1" style="border-collapse: collapse; width: 100%; height: 61px;">
+<tbody>
+<tr style="height: 61px; border-color: RED; background-color: red;">
+<td style="width: 100%; height: 61px;">
+<p style="text-align: center;"><span style="background-color: #ff0000; color: #ffffff;"><strong>STANDARD PENSIONS TRUST&nbsp;</strong></span></p>
+<p style="text-align: center;"><span style="background-color: #ff0000; color: #ffffff;"><strong>CLIENT ONLINE ENROLLMENT FORM</strong></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<img src="{% static 'img/logo-small.png' %}" width="500" height="500">
+<p style="text-align: center;"><strong>Personal Information</strong></p>
+{% for us in us %}
+
+
+
+<p><strong>Full Name:</strong> {{ us.first_name }} {{ us.last_name }} </p>
+<p><strong>Date of Birth</strong>:{{ us.profile.dob }} </p>
+<p><strong>Gender</strong>: {{ us.profile.gender }}</p>
+<p><strong>Nationality</strong>: {{ us.profile.country }}</p>
+<p><strong>Country of Birth:</strong> {{ us.profile.country_of_birth }}</p>
+<p><strong>Place of Birth</strong>: {{ us.profile.place_of_birth }}</p>
+<p><strong>SSNIT NO.: </strong>{{ us.profile.ssnit }}</p>
+<p><strong>Ghana Card ID Number: </strong>{{ us.profile.national_id }}</p>
+<hr />
+<p style="text-align: center;"><strong>Contact and Address Information</strong></p>
+<p><strong>Phone Number</strong>: {{ us.profile.phone }}</p>
+<p><strong>Other Phone Number</strong>: {{ us.profile.alt_phone }}</p>
+<p><strong>Postal Address</strong>: {{ us.profile.postal_address }}</p>
+<p style="text-align: left;"><strong>Residential Address: </strong>{{ us.profile.res_address }}</p>
+<hr />
+<p style="text-align: center;"><strong>Next of Kin Information</strong></p>
+<p style="text-align: left;"><strong>Full Name</strong>: {{ us.profile.nok }} </p>
+<p style="text-align: left;"><strong>Relation</strong>: {{ us.profile.nok_rel }}</p>
+<p style="text-align: left;"><strong>Contact Number</strong>: {{ us.profile.nok_phone }}</p>
+<p style="text-align: left;"><strong>Residential Address</strong>: {{ us.profile.nok_address }}</p>
+<hr />
+<p style="text-align: center;"><strong>Other Information Information</strong></p>
+<p style="text-align: left;"><strong>Father's Name</strong>: {{ us.profile.father_name }}</p>
+<p style="text-align: left;"><strong>Father's Address</strong>: {{ us.profile.father_address }}</p>
+<p style="text-align: left;"><strong>Mother's Name: </strong>{{ us.profile.mother_name }}</p>
+<p style="text-align: left;"><strong>Mother's Address:</strong> {{ us.profile.mother_address }}</p>
+<p style="text-align: left;"></p>
+<p style="text-align: left;"></p>
+<br>
+{% endfor %}
+
+<br>
+<br><br><br>
+
+<p style="text-align: left;">Signature:__________________________________&nbsp; &nbsp; &nbsp; &nbsp;Date:________________</p>
+<table border="1" style="border-collapse: collapse; width: 100%; height: 61px;">
+<tbody>
+<tr style="height: 61px; border-color: RED; background-color: red;">
+<td style="width: 100%; height: 61px;">
+<p style="text-align: center;"><span style="background-color: #ff0000; color: #ffffff;"><strong>STANDARD PENSIONS TRUST&nbsp;</strong></span></p>
+<p style="text-align: center;"><span style="background-color: #ff0000; color: #ffffff;"><strong>CLIENT ONLINE ENROLLMENT FORM</strong></span></p>
+</td>
+</tr>
+</tbody>
+</table>
+<p style="text-align: center;"><strong>Nominated Beneficiaries</strong></p>
+{% for bene in bene %}
+
+<br>
+<p><strong>Name</strong>: {{ bene.first_name }} {{ bene.last_name }} | <strong>Relation</strong>: {{ bene.relationship }} | <strong>Allocation</strong>: {{ bene.allocation }}% | <strong>Address</strong>: {{ bene.address }} | <strong>Contact</strong>: {{ bene.contact }}</p>
+<br>
+{#<p><strong>Relation</strong>: {{ us.profile.alt_phone }}</p>#}
+{#<p><strong>Address Address</strong>: {{ us.profile.postal_address }}</p>#}
+{#<p style="text-align: left;"><strong>Contact: </strong>{{ us.profile.res_address }}</p>#}
+{#<p style="text-align: left;"><strong>Benefit Allocated: </strong>{{ us.profile.res_address }}</p>#}
+<hr />
+
+{% endfor %}
+<br><br><br><br>
+<p style="text-align: left;">Signature:__________________________________&nbsp; &nbsp; &nbsp; &nbsp;Date:________________</p>
+</body>
+
+</html>
